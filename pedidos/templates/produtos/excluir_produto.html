@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Excluir Produto{% endblock %}
+
+{% block content %}
+
+<div class="card shadow p-4">
+        <div style="text-align: center;">
+            <h2 class="mb-3 text-danger">🗑️ Excluir Produto</h2>
+        </div>
+    <div class="alert alert-danger">
+        Tem certeza que deseja excluir o produto <strong>{{ produto.nome }}</strong>?
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+            <div style="text-align: center;">
+                <button type="submit" class="btn btn-danger">
+                    Confirmar Exclusão
+                </button>
+
+                <a href="{% url 'pedidos:listar_produto' %}" class="btn btn-secondary">
+                    Cancelar
+                </a>
+            </div>
+    </form>
+</div>
+
+{% endblock %}
