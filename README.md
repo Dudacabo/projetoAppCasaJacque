@@ -1,4 +1,4 @@
-# Lojinha Django
+# Lojinha Sabor da Casa Jacque
 
 Uma aplicação Django simples para gerenciamento de pedidos e produtos.
 
