@@ -3,6 +3,7 @@ from .forms import ProdutoForm, PedidoForm, ItemPedidoForm
 from .models import Pedido, Produto, ItemPedido
 from django.http import HttpResponse
 
+# HOME
 def home(request):
     produtos = Produto.objects.all().order_by('-id')[:5]
     pedidos = Pedido.objects.all().order_by('-id')[:5]
@@ -15,6 +16,7 @@ def home(request):
 
 
 
+# PRODUTOS
 def cadastrar_produto(request):
     if request.method == "POST":
         form = ProdutoForm(request.POST)
@@ -71,6 +73,7 @@ def excluir_produto(request, id):
     return render(request, 'produtos/excluir_produto.html', {'produto': produto} )
 
 
+# PEDIDOS
 def cadastrar_pedido(request):
     if request.method == "POST":
         form = PedidoForm(request.POST)
@@ -123,5 +126,75 @@ def excluir_pedido(request, id):
         pedido.delete()
         return redirect("pedidos:listar_pedido")
     return render(request, "pedidos/excluir_pedido.html", {'pedidos': pedido})
+
+def detalhar_pedido(request, id):
+    pedido = get_object_or_404(Pedido, id=id)
+    
+    context = {
+        'pedido': pedido
+    }
+    return render(request, "pedidos/detalhar_pedido.html", context)
+
+# ITENS DO PEDIDO
+def adicionar_item(request, pedido_id):
+    pedido = get_object_or_404(Pedido, id=pedido_id)
+    
+    if request.method == "POST":
+        form = ItemPedidoForm(request.POST)
+
+        if form.is_valid():
+            item = form.save(commit=False)
+            item.pedido = pedido
+            item.save()
+            return redirect("pedidos:detalhar_pedido", pedido.id)
+    
+    else:
+        form = ItemPedidoForm()
+    
+    context = {
+        'form': form,
+        'pedido': pedido
+    }
+    return render(request, "item_pedido/adicionar_item.html", context)
+
+
+def excluir_item(request, item_id):
+    item = get_object_or_404(ItemPedido, id=item_id)
+    
+    if request.method == "POST":
+        item.delete()
+        return redirect("pedidos:detalhar_pedido", item.pedido.id)
+    
+    return render(request, "item_pedido/excluir_item.html", {'item': item})
+
+
+def editar_item(request, item_id):
+    item = get_object_or_404(ItemPedido, id=item_id)
+    
+    if request.method == "POST":
+        form = ItemPedidoForm(request.POST, instance=item)
+        
+        if form.is_valid():
+            form.save()
+            return redirect("pedidos:detalhar_pedido", item.pedido.id)
+    
+    else:
+        form = ItemPedidoForm(instance=item)
+    
+    context = {
+        'form': form,
+        'item': item
+    }
+    return render(request, "item_pedido/editar_item.html", context)
+
+def listar_item(request, id):
+    pedido = get_object_or_404(Pedido, id=id)
+    
+    context = {
+        'pedido': pedido
+    }
+    return render(request, "item_pedido/listar_item.html", context)
+
+
 
     

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Adicionar Item{% endblock %}
+
+{% block content %}
+
+<div class="card shadow p-4">
+
+    <h2>Adicionar Produto ao Pedido #{{ pedido.id }}</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-success">
+            Salvar
+        </button>
+
+        <a href="{% url 'pedidos:detalhar_pedido' pedido.id %}" class="btn btn-secondary">
+            Voltar
+        </a>
+    </form>
+
+</div>
+
+{% endblock %}

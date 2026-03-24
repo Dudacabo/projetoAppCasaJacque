@@ -16,4 +16,10 @@ urlpatterns = [
     path('pedido/listar/', views.listar_pedido , name='listar_pedido'),
     path('pedido/editar/<int:id>/', views.editar_pedido , name='editar_pedido'),
     path('pedido/excluir/<int:id>/', views.excluir_pedido , name='excluir_pedido'),
+    path('pedido/detalhar/<int:id>/', views.detalhar_pedido , name='detalhar_pedido'),
+    # ITENS DO PEDIDO
+    path('pedido/adicionar-item/<int:pedido_id>/', views.adicionar_item , name='adicionar_item'),
+    path('pedido/excluir-item/<int:item_id>/', views.excluir_item , name='excluir_item'),
+    path('pedido/editar-item/<int:item_id>/', views.editar_item , name='editar_item'),
+    path('item/listar/<int:id>/', views.listar_item , name='listar_item'),
 ]

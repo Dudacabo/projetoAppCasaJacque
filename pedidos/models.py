@@ -41,6 +41,10 @@ class ItemPedido(models.Model):
     )
     quantidade = models.PositiveIntegerField()
 
+    @property
+    def subtotal(self):
+        return self.produto.preco * self.quantidade
+
     def __str__(self):
         return f"{self.produto.nome} - {self.quantidade}"
 

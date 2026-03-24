@@ -27,14 +27,16 @@ class PedidoForm(forms.ModelForm):
 
     class Meta:
         model = Pedido
-        fields = ("cliente_nome",)
+        fields = ("cliente_nome", 'entregue')
 
         widgets = {'cliente_nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Digite aqui'}),
+                   'entregue': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
 
         }
 
         labels = {
             'cliente_nome': "Nome do cliente",
+            'entregue': "Entregue",
         }
 
 
