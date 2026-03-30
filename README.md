@@ -1,19 +1,23 @@
 # Lojinha Sabor da Casa Jacque
 
-Uma aplicação Django simples para gerenciamento de pedidos e produtos.
+Uma aplicação Django completa para gerenciamento de pedidos e produtos com sistema de autenticação.
 
 ## 📋 Descrição
 
-Este é um projeto Django desenvolvido para gerenciar uma loja virtual com funcionalidades básicas de:
+Este é um projeto Django desenvolvido para gerenciar uma loja virtual com funcionalidades completas de:
 - Cadastro de produtos
 - Gestão de pedidos
 - Controle de itens por pedido
+- Sistema de autenticação de usuários
+- Interface responsiva com Bootstrap
 
 ## 🚀 Tecnologias
 
 - **Django 6.0.2** - Framework web
 - **SQLite** - Banco de dados
 - **Python** - Linguagem principal
+- **Bootstrap 5** - Framework CSS para interface responsiva
+- **Django Auth** - Sistema de autenticação nativo
 
 ## 📦 Instalação
 
@@ -39,7 +43,12 @@ pip install -r requirements.txt
 python manage.py migrate
 ```
 
-5. Inicie o servidor de desenvolvimento:
+5. Crie um superusuário para acessar o sistema:
+```bash
+python manage.py createsuperuser
+```
+
+6. Inicie o servidor de desenvolvimento:
 ```bash
 python manage.py runserver
 ```
@@ -48,11 +57,17 @@ python manage.py runserver
 
 ```
 Sabor_Casa/
-├── lojinha/          # Configurações principais do Django
-├── pedidos/          # App de gestão de pedidos
-├── db.sqlite3        # Banco de dados SQLite
-├── manage.py         # Script de gerenciamento Django
-└── requirements.txt  # Dependências do projeto
+├── lojinha/                 # Configurações principais do Django
+├── pedidos/                 # App de gestão de pedidos
+│   ├── migrations/         # Migrações do banco de dados
+│   ├── templates/          # Templates HTML do app
+│   └── views.py            # Views com autenticação
+├── templates/               # Templates globais
+│   ├── base.html           # Template base com navbar
+│   └── registration/       # Templates de autenticação
+├── db.sqlite3              # Banco de dados SQLite
+├── manage.py               # Script de gerenciamento Django
+└── requirements.txt        # Dependências do projeto
 ```
 
 ## 🏗️ Models
@@ -76,16 +91,49 @@ Sabor_Casa/
 
 ## 🔧 Funcionalidades
 
-- **CRUD** completo para produtos
-- **Gestão** de pedidos com múltiplos itens
+### Autenticação e Segurança
+- **Sistema de login** obrigatório para todas as funcionalidades
+- **Logout** seguro com redirecionamento
+- **Proteção** de views com decorator `@login_required`
+- **Interface** personalizada de login
+
+### Gestão de Produtos
+- **CRUD** completo para produtos (Criar, Ler, Atualizar, Deletar)
+- **Validação** de formulários
+- **Status** de ativação/desativação de produtos
+
+### Gestão de Pedidos
+- **CRUD** completo para pedidos
+- **Gestão** de múltiplos itens por pedido
 - **Cálculo** automático do total do pedido
+- **Controle** de status de entrega
+
+### Interface e Usabilidade
+- **Design responsivo** com Bootstrap 5
+- **Navbar** com informações do usuário logado
+- **Botão** de logout acessível
+- **Templates** customizados e modernos
 - **Interface** administrativa Django
-- **Templates** customizados
 
 ## 🌐 Acesso
 
 - **Aplicação**: http://127.0.0.1:8000/
+- **Login**: http://127.0.0.1:8000/login/
 - **Admin**: http://127.0.0.1:8000/admin/
+
+## 🔄 Fluxo de Trabalho
+
+1. **Acesso inicial**: O usuário é redirecionado para a página de login
+2. **Autenticação**: Após login válido, o usuário acessa a página inicial
+3. **Navegação**: Todas as funcionalidades são acessíveis através da navbar
+4. **Sessão**: O usuário pode fazer logout a qualquer momento através do botão "Sair"
+
+## 📝 Observações
+
+- Todas as views (exceto login) requerem autenticação obrigatória
+- O sistema redireciona automaticamente para login se o usuário não estiver autenticado
+- Após logout, o usuário é redirecionado para a página de login
+- O nome do usuário logado é exibido na navbar
 
 ## 🤝 Contribuição
 

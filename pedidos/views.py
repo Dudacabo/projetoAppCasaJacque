@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProdutoForm, PedidoForm, ItemPedidoForm
 from .models import Pedido, Produto, ItemPedido
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 # HOME
+@login_required
 def home(request):
     produtos = Produto.objects.all().order_by('-id')[:5]
     pedidos = Pedido.objects.all().order_by('-id')[:5]
@@ -17,6 +19,7 @@ def home(request):
 
 
 # PRODUTOS
+@login_required
 def cadastrar_produto(request):
     if request.method == "POST":
         form = ProdutoForm(request.POST)
@@ -34,6 +37,7 @@ def cadastrar_produto(request):
     return render(request, "produtos/cadastrar_produto.html", context)
 
 
+@login_required
 def listar_produto(request):
      produtos = Produto.objects.all()
 
@@ -43,6 +47,7 @@ def listar_produto(request):
      return render(request, "produtos/listar_produto.html", context)
 
 
+@login_required
 def editar_produto(request, id):
     produto = get_object_or_404(Produto, id=id)
 
@@ -63,6 +68,7 @@ def editar_produto(request, id):
     return render(request, "produtos/editar_produto.html", context)
 
 
+@login_required
 def excluir_produto(request, id):
     produto = get_object_or_404(Produto, id=id)
 
@@ -74,6 +80,7 @@ def excluir_produto(request, id):
 
 
 # PEDIDOS
+@login_required
 def cadastrar_pedido(request):
     if request.method == "POST":
         form = PedidoForm(request.POST)
@@ -91,6 +98,7 @@ def cadastrar_pedido(request):
     return render(request, "pedidos/cadastrar_pedido.html", context)
 
 
+@login_required
 def listar_pedido(request):
     pedidos = Pedido.objects.all()
 
@@ -100,6 +108,7 @@ def listar_pedido(request):
     return render(request, 'pedidos/listar_pedido.html', context)
 
 
+@login_required
 def editar_pedido(request, id):
     pedido = get_object_or_404(Pedido, id=id)
 
@@ -119,14 +128,16 @@ def editar_pedido(request, id):
     return render(request, "pedidos/editar_pedido.html", context)
 
 
+@login_required
 def excluir_pedido(request, id):
     pedido = get_object_or_404(Pedido, id=id)
 
     if request.method == "POST":
         pedido.delete()
         return redirect("pedidos:listar_pedido")
-    return render(request, "pedidos/excluir_pedido.html", {'pedidos': pedido})
+    return render(request, "pedidos/excluir_pedido.html", {'pedido': pedido})
 
+@login_required
 def detalhar_pedido(request, id):
     pedido = get_object_or_404(Pedido, id=id)
     
@@ -136,6 +147,7 @@ def detalhar_pedido(request, id):
     return render(request, "pedidos/detalhar_pedido.html", context)
 
 # ITENS DO PEDIDO
+@login_required
 def adicionar_item(request, pedido_id):
     pedido = get_object_or_404(Pedido, id=pedido_id)
     
@@ -158,6 +170,7 @@ def adicionar_item(request, pedido_id):
     return render(request, "item_pedido/adicionar_item.html", context)
 
 
+@login_required
 def excluir_item(request, item_id):
     item = get_object_or_404(ItemPedido, id=item_id)
     
@@ -168,6 +181,7 @@ def excluir_item(request, item_id):
     return render(request, "item_pedido/excluir_item.html", {'item': item})
 
 
+@login_required
 def editar_item(request, item_id):
     item = get_object_or_404(ItemPedido, id=item_id)
     
@@ -187,6 +201,7 @@ def editar_item(request, item_id):
     }
     return render(request, "item_pedido/editar_item.html", context)
 
+@login_required
 def listar_item(request, id):
     pedido = get_object_or_404(Pedido, id=id)
     
