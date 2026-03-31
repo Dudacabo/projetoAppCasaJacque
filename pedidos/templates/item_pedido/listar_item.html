@@ -17,20 +17,20 @@
     <table class="table table-striped">
         <thead class="table-dark">
             <tr>
-                <th>Produto</th>
-                <th>Quantidade</th>
-                <th>Valor Unitário</th>
-                <th>Subtotal</th>
+                <th class="text-center">Produto</th>
+                <th class="text-center">Quantidade</th>
+                <th class="text-center">Valor Unitário</th>
+                <th class="text-center">Subtotal</th>
             </tr>
         </thead>
 
         <tbody>
             {% for item in pedido.itens.all %}
             <tr>
-                <td>{{ item.produto.nome }}</td>
-                <td>{{ item.quantidade }}</td>
-                <td>R$ {{ item.produto.preco|floatformat:2 }}</td>
-                <td>R$ {{ item.subtotal|floatformat:2 }}</td>
+                <td class="text-center">{{ item.produto.nome }}</td>
+                <td class="text-center">{{ item.quantidade }}</td>
+                <td class="text-center">R$ {{ item.produto.preco|floatformat:2 }}</td>
+                <td class="text-center">R$ {{ item.subtotal|floatformat:2 }}</td>
             </tr>
 
             {% empty %}
@@ -43,8 +43,16 @@
         </tbody>
     </table>
 
-    <h4 class="mt-3">Total do Pedido: R$ {{ pedido.total }}</h4>
+    <div style="text-align: center;" class="mt-3" style="margin-bottom: 20px;">
+        <h4>Total do Pedido: R$ {{ pedido.total }}</h4>
+    </div>
 
+<br>
+    <div style="text-align: center;">
+        <a href="{% url 'pedidos:home' %}" class="btn btn-secondary mb-3">
+            Voltar
+        </a>
+    </div>
 </div>
 
 {% endblock %}

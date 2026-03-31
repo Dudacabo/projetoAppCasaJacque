@@ -23,7 +23,7 @@
             <tr>
                 <td class="text-center">{{ produto.id }}</td>
                 <td class="text-center">{{ produto.nome }}</td>
-                <td class="text-center">R$ {{ produto.preco }}</td>
+                <td class="text-center">R$ {{ produto.preco|floatformat:2 }}</td>
                 <td class="text-center">
                     <a href="{% url 'pedidos:editar_produto' produto.id %}" class="btn btn-warning btn-sm">✏️</a>
                     <a href="{% url 'pedidos:excluir_produto' produto.id %}" class="btn btn-danger btn-sm">🗑️</a>
@@ -31,14 +31,14 @@
             </tr>
             {% empty %}
             <tr>
-                <td colspan="4" class="text-center">Nenhum produto cadastrado.</td>
+                <td colspan="5" class="text-center">Nenhum produto cadastrado.</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <div style="text-align: center;">
         <a href="{% url 'pedidos:cadastrar_produto' %}" class="btn btn-success mb-3">
-        ➕ Novo Produto
+        Novo Produto
         </a>
     </div>
 </div>

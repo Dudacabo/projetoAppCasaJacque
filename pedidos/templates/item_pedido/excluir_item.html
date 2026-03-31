@@ -9,7 +9,7 @@
             <h2 class="mb-3 text-danger">🗑️ Excluir Item</h2>
         </div>
     <div class="alert alert-danger">
-        Tem certeza que deseja excluir o item <strong>{{ item.produto.nome }}</strong> do seu pedido?
+        Tem certeza que deseja excluir o item <strong>{{ item.produto.nome }}</strong> do pedido de <strong>{{ item.pedido.cliente_nome }}</strong>?
     </div>
 
     <form method="POST">

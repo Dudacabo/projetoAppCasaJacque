@@ -11,14 +11,16 @@
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
+        
+        <div style="text-align: center;">
+            <button type="submit" class="btn btn-primary">
+                Salvar
+            </button>
 
-        <button type="submit" class="btn btn-primary">
-            Salvar
-        </button>
-
-        <a href="{% url 'pedidos:listar_produto' %}" class="btn btn-secondary">
-            Cancelar
-        </a>
+            <a href="{% url 'pedidos:listar_produto' %}" class="btn btn-secondary">
+                Cancelar
+            </a>
+        </div>
     </form>
 </div>
 
