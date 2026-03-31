@@ -39,7 +39,7 @@ def cadastrar_produto(request):
 
 @login_required
 def listar_produto(request):
-     produtos = Produto.objects.all()
+     produtos = Produto.objects.all().order_by('-id')
 
      context = {
          "produtos": produtos
@@ -100,7 +100,7 @@ def cadastrar_pedido(request):
 
 @login_required
 def listar_pedido(request):
-    pedidos = Pedido.objects.all()
+    pedidos = Pedido.objects.all().order_by('-id')
 
     context = {
         'pedidos': pedidos

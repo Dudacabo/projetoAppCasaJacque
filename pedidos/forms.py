@@ -55,3 +55,9 @@ class ItemPedidoForm(forms.ModelForm):
             'produto': 'Produto',
             'quantidade': 'Quantidade',
         }
+
+    def clean_quantidade(self):
+        quantidade = self.cleaned_data['quantidade']
+        if quantidade <= 0:
+            raise forms.ValidationError("Quantidade deve ser maior que zero.")
+        return quantidade
