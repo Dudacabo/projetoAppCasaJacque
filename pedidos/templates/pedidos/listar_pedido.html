@@ -14,7 +14,7 @@
             <th class="text-center">ID</th>
             <th class="text-center">Cliente</th>
             <th class="text-center">Data do Pedido</th>
-            <th class="text-center">Entregue</th>
+            <th class="text-center">Status</th>
             <th class="text-center">Ações</th>
         </tr>
     </thead>
@@ -25,10 +25,12 @@
             <td class="text-center">{{ pedido.cliente_nome }}</td>
             <td class="text-center">{{ pedido.data_criacao|date:"d/m/Y" }}</td>
             <td class="text-center">
-                {% if pedido.entregue %}
-                    ✅
+                {% if pedido.status == 'entregue' %}
+                    <span>Entregue</span>
+                {% elif pedido.status == 'producao' %}
+                    <span>Em Produção</span>
                 {% else %}
-                    ❌ 
+                    <span>Pendente</span>
                 {% endif %}
             </td>
             <td class="text-center">

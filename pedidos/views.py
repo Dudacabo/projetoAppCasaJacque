@@ -3,6 +3,10 @@ from .forms import ProdutoForm, PedidoForm, ItemPedidoForm
 from .models import Pedido, Produto, ItemPedido
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
+
+def is_admin(user):
+    return user.is_superuser
 
 # HOME
 @login_required
@@ -69,6 +73,7 @@ def editar_produto(request, id):
 
 
 @login_required
+@user_passes_test(is_admin)
 def excluir_produto(request, id):
     produto = get_object_or_404(Produto, id=id)
 
@@ -127,8 +132,9 @@ def editar_pedido(request, id):
     }
     return render(request, "pedidos/editar_pedido.html", context)
 
-
+            
 @login_required
+@user_passes_test(is_admin)
 def excluir_pedido(request, id):
     pedido = get_object_or_404(Pedido, id=id)
 

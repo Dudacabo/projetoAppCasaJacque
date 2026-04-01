@@ -13,7 +13,12 @@ class Produto(models.Model):
 class Pedido(models.Model):
     cliente_nome = models.CharField(max_length=100)
     data_criacao = models.DateTimeField(auto_now_add=True)
-    entregue = models.BooleanField(default=False)
+    STATUS_CHOICES = (
+        ('pendente', 'Pendente'),
+        ('producao', 'Em Produção'),
+        ('entregue', 'Entregue'),
+    )
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pendente')
 
     class Meta:
         verbose_name = "Pedido"

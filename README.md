@@ -81,7 +81,7 @@ Sabor_Casa/
 ### Pedido
 - `cliente_nome`: Nome do cliente
 - `data_criacao`: Data de criação automática
-- `entregue`: Status de entrega
+- `status`: Status do pedido (Pendente, Em Produção, Entregue)
 - `total`: Calculado automaticamente
 
 ### ItemPedido

@@ -21,6 +21,6 @@ class ItemPedidoInline(admin.TabularInline):
 
 @admin.register(Pedido)
 class PedidoAdmin(admin.ModelAdmin):
-    list_display = ("id", "cliente_nome", "entregue", "data_criacao")
-    list_filter = ("entregue",)
+    list_display = ("id", "cliente_nome", "status", "data_criacao")
+    list_filter = ("status",)
     inlines = [ItemPedidoInline]
