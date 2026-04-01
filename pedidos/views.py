@@ -43,12 +43,18 @@ def cadastrar_produto(request):
 
 @login_required
 def listar_produto(request):
-     produtos = Produto.objects.all().order_by('-id')
+    query = request.GET.get('q')
 
-     context = {
-         "produtos": produtos
-     }
-     return render(request, "produtos/listar_produto.html", context)
+    if query:
+        produtos = Produto.objects.filter(nome__icontains=query)
+    else:
+        produtos = Produto.objects.all()
+
+    context = {
+        "produtos": produtos,
+        "query": query
+    }
+    return render(request, "produtos/listar_produto.html", context)
 
 
 @login_required
@@ -105,10 +111,16 @@ def cadastrar_pedido(request):
 
 @login_required
 def listar_pedido(request):
-    pedidos = Pedido.objects.all().order_by('-id')
+    query = request.GET.get('q')
+
+    if query:
+        pedidos = Pedido.objects.filter(cliente_nome__icontains=query)
+    else:
+        pedidos = Pedido.objects.all()
 
     context = {
-        'pedidos': pedidos
+        'pedidos': pedidos,
+        'query': query
     }
     return render(request, 'pedidos/listar_pedido.html', context)
 
