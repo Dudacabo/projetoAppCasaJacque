@@ -4,6 +4,7 @@ from .models import Pedido, Produto, ItemPedido
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
+from django.core.paginator import Paginator
 
 def is_admin(user):
     return user.is_superuser
@@ -11,8 +12,8 @@ def is_admin(user):
 # HOME
 @login_required
 def home(request):
-    produtos = Produto.objects.all().order_by('-id')[:5]
-    pedidos = Pedido.objects.all().order_by('-id')[:5]
+    produtos = Produto.objects.all().order_by('-id')
+    pedidos = Pedido.objects.all().order_by('-id')
 
     context = {
          "produtos": produtos,
@@ -43,12 +44,16 @@ def cadastrar_produto(request):
 
 @login_required
 def listar_produto(request):
-    query = request.GET.get('q')
+    query = request.GET.get('q', '').strip()
 
     if query:
-        produtos = Produto.objects.filter(nome__icontains=query)
+        produtos_lista = Produto.objects.filter(nome__icontains=query)
     else:
-        produtos = Produto.objects.all()
+        produtos_lista = Produto.objects.all()
+
+    paginator = Paginator(produtos_lista, 5)  # 5 por página
+    page_number = request.GET.get('page')
+    produtos = paginator.get_page(page_number)
 
     context = {
         "produtos": produtos,
@@ -111,12 +116,16 @@ def cadastrar_pedido(request):
 
 @login_required
 def listar_pedido(request):
-    query = request.GET.get('q')
+    query = request.GET.get('q', '').strip()
 
     if query:
-        pedidos = Pedido.objects.filter(cliente_nome__icontains=query)
+        pedidos_lista = Pedido.objects.filter(cliente_nome__icontains=query)
     else:
-        pedidos = Pedido.objects.all()
+        pedidos_lista = Pedido.objects.all()
+
+    paginator = Paginator(pedidos_lista, 5)
+    page_number = request.GET.get('page')
+    pedidos = paginator.get_page(page_number)
 
     context = {
         'pedidos': pedidos,
