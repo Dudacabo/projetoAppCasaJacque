@@ -12,10 +12,51 @@ HOME
         <h2>Painel de Gerenciamento</h2>
     </div>
 
+    <div class="text-center mb-4">
+        <a href="{% url 'pedidos:cadastrar_pedido' %}" class="btn btn-success me-2">
+            ➕ Novo Pedido
+        </a>
+        <a href="{% url 'pedidos:cadastrar_produto' %}" class="btn btn-primary">
+            ➕ Novo Produto
+        </a>
+    </div>
+
+    <div class="row text-center mb-4">
+
+        <div class="col-md-3">
+            <div class="card shadow-sm p-3">
+                <h6>📦 Pedidos</h6>
+                <h3>{{ total_pedidos }}</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm p-3">
+                <h6>🛠️ Produção</h6>
+                <h3 class="text-warning">{{ pedidos_producao }}</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm p-3">
+                <h6>⏳ Pendentes</h6>
+                <h3 class="text-secondary">{{ pedidos_pendentes }}</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm p-3">
+                <h6>✅ Entregues</h6>
+                <h3 class="text-success">{{ pedidos_entregues }}</h3>
+            </div>
+        </div>
+
+    </div>
+
     <div class="d-flex justify-content-center gap-4 flex-wrap">
 
         <!-- Tabela Pedidos -->
-        <div style="width: 420px;">
+        <div class="flex-fill" style="max-width: 500px;">
             <div class="card shadow-sm p-3">
 
                 <h4 class="text-center mb-3">Lista de Pedidos</h4>
@@ -68,7 +109,7 @@ HOME
         </div>
 
         <!-- Tabela Produtos -->
-        <div style="width: 420px;">
+        <div class="flex-fill" style="max-width: 500px;">
             <div class="card shadow-sm p-3">
 
                 <h4 class="text-center mb-3">Lista de Produtos</h4>

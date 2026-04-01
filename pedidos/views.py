@@ -12,14 +12,24 @@ def is_admin(user):
 # HOME
 @login_required
 def home(request):
-    produtos = Produto.objects.all().order_by('-id')
-    pedidos = Pedido.objects.all().order_by('-id')
+    produtos = Produto.objects.all().order_by('-id')[:5]
+    pedidos = Pedido.objects.all().order_by('-id')[:5]
+
+    total_pedidos = Pedido.objects.count()
+    pedidos_producao = Pedido.objects.filter(status='producao').count()
+    pedidos_pendentes = Pedido.objects.filter(status='pendente').count()
+    pedidos_entregues = Pedido.objects.filter(status='entregue').count()
 
     context = {
-         "produtos": produtos,
-         'pedidos': pedidos
-     }
-    return render(request, "home.html", context)
+    "produtos": produtos,
+    "pedidos": pedidos,
+    "total_pedidos": total_pedidos,
+    "pedidos_producao": pedidos_producao,
+    "pedidos_pendentes": pedidos_pendentes,
+    "pedidos_entregues": pedidos_entregues,
+    }
+
+    return render(request, "home.html", context)        
 
 
 
