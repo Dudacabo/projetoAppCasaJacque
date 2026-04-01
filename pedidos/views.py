@@ -126,21 +126,33 @@ def cadastrar_pedido(request):
 
 @login_required
 def listar_pedido(request):
-    query = request.GET.get('q', '').strip()
+    status = request.GET.get('status')
+    query = request.GET.get('q')
 
+    pedidos_lista = Pedido.objects.all()
+
+    # filtro por status
+    if status:
+        pedidos_lista = pedidos_lista.filter(status=status)
+
+    # filtro por nome
     if query:
-        pedidos_lista = Pedido.objects.filter(cliente_nome__icontains=query)
-    else:
-        pedidos_lista = Pedido.objects.all()
+        pedidos_lista = pedidos_lista.filter(cliente_nome__icontains=query)
 
-    paginator = Paginator(pedidos_lista, 5)
+    # ordenação (boa prática)
+    pedidos_lista = pedidos_lista.order_by('-id')
+
+    # paginação
+    paginator = Paginator(pedidos_lista, 5)  # 5 por página
     page_number = request.GET.get('page')
     pedidos = paginator.get_page(page_number)
 
     context = {
         'pedidos': pedidos,
+        'status': status,
         'query': query
     }
+
     return render(request, 'pedidos/listar_pedido.html', context)
 
 
