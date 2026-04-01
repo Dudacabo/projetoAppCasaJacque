@@ -12,7 +12,7 @@ def is_admin(user):
 # HOME
 @login_required
 def home(request):
-    produtos = Produto.objects.all().order_by('-id')[:5]
+    produtos = Produto.objects.all().order_by("id")
     pedidos = Pedido.objects.all().order_by('-id')[:5]
 
     total_pedidos = Pedido.objects.count()
