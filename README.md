@@ -1,23 +1,25 @@
-# Lojinha Sabor da Casa Jacque
+# APP GERENCIADOR DE PEDIDOS E PRODUTOS PARA LOJA
 
 Uma aplicação Django completa para gerenciamento de pedidos e produtos com sistema de autenticação.
 
 ## 📋 Descrição
 
-Este é um projeto Django desenvolvido para gerenciar uma loja virtual com funcionalidades completas de:
-- Cadastro de produtos
-- Gestão de pedidos
-- Controle de itens por pedido
-- Sistema de autenticação de usuários
-- Interface responsiva com Bootstrap
+Este é um projeto Django completo desenvolvido para gerenciar uma loja virtual com funcionalidades robustas de:
+- **Cadastro e gestão** de produtos com controle de ativação
+- **Sistema completo** de pedidos com múltiplos status
+- **Controle detalhado** de itens por pedido
+- **Sistema de autenticação** obrigatório para todas as funcionalidades
+- **Interface responsiva** e moderna com Bootstrap 5
+- **Painel administrativo** Django integrado
 
 ## 🚀 Tecnologias
 
-- **Django 6.0.2** - Framework web
-- **SQLite** - Banco de dados
-- **Python** - Linguagem principal
-- **Bootstrap 5** - Framework CSS para interface responsiva
+- **Django 6.0.2** - Framework web principal
+- **Python 3.x** - Linguagem de programação
+- **Bootstrap 5** - Framework CSS para design responsivo
 - **Django Auth** - Sistema de autenticação nativo
+- **Django Templates** - Sistema de templates HTML
+- **Django Forms** - Validação e processamento de formulários
 
 ## 📦 Instalação
 
@@ -58,13 +60,23 @@ python manage.py runserver
 ```
 Sabor_Casa/
 ├── lojinha/                 # Configurações principais do Django
-├── pedidos/                 # App de gestão de pedidos
+│   ├── settings.py         # Configurações do projeto
+│   ├── urls.py            # URLs principais (login, logout)
+│   └── wsgi.py            # Servidor WSGI
+├── pedidos/                 # App principal de gestão
 │   ├── migrations/         # Migrações do banco de dados
-│   ├── templates/          # Templates HTML do app
-│   └── views.py            # Views com autenticação
+│   ├── templates/          # Templates HTML organizados
+│   │   ├── produtos/       # Templates de produtos
+│   │   ├── pedidos/       # Templates de pedidos
+│   │   ├── item_pedido/    # Templates de itens
+│   │   └── registration/   # Templates de autenticação
+│   ├── admin.py           # Configuração admin Django
+│   ├── forms.py           # Formulários personalizados
+│   ├── models.py          # Models do banco de dados
+│   ├── urls.py            # URLs do app pedidos
+│   └── views.py           # Views com autenticação
 ├── templates/               # Templates globais
-│   ├── base.html           # Template base com navbar
-│   └── registration/       # Templates de autenticação
+│   └── base.html           # Template base com navbar
 ├── db.sqlite3              # Banco de dados SQLite
 ├── manage.py               # Script de gerenciamento Django
 └── requirements.txt        # Dependências do projeto
@@ -103,37 +115,43 @@ Sabor_Casa/
 - **Status** de ativação/desativação de produtos
 
 ### Gestão de Pedidos
-- **CRUD** completo para pedidos
+- **CRUD** completo para pedidos com validação
+- **Sistema de status** com três estados: Pendente, Em Produção, Entregue
 - **Gestão** de múltiplos itens por pedido
 - **Cálculo** automático do total do pedido
-- **Controle** de status de entrega
+- **Controle** granular do fluxo de trabalho
 
 ### Interface e Usabilidade
 - **Design responsivo** com Bootstrap 5
-- **Navbar** com informações do usuário logado
-- **Botão** de logout acessível
-- **Templates** customizados e modernos
-- **Interface** administrativa Django
+- **Navbar** dinâmica com nome do usuário logado
+- **Sistema de logout** seguro com redirecionamento
+- **Templates** customizados e organizados por funcionalidade
+- **Interface** administrativa Django completa
+- **Página de login** centralizada e moderna
 
 ## 🌐 Acesso
 
 - **Aplicação**: http://127.0.0.1:8000/
-- **Login**: http://127.0.0.1:8000/login/
 - **Admin**: http://127.0.0.1:8000/admin/
 
 ## 🔄 Fluxo de Trabalho
 
-1. **Acesso inicial**: O usuário é redirecionado para a página de login
-2. **Autenticação**: Após login válido, o usuário acessa a página inicial
-3. **Navegação**: Todas as funcionalidades são acessíveis através da navbar
-4. **Sessão**: O usuário pode fazer logout a qualquer momento através do botão "Sair"
+1. **Acesso inicial**: Usuário é redirecionado automaticamente para `/login/`
+2. **Autenticação**: Login válido redireciona para página inicial (`/`)
+3. **Dashboard**: Página home mostra resumo de produtos e pedidos recentes
+4. **Navegação**: Menu principal com acesso a todas as funcionalidades
+5. **Gestão**: CRUD completo para produtos e pedidos
+6. **Sessão**: Logout seguro com redirecionamento para página de login
 
 ## 📝 Observações
 
-- Todas as views (exceto login) requerem autenticação obrigatória
-- O sistema redireciona automaticamente para login se o usuário não estiver autenticado
-- Após logout, o usuário é redirecionado para a página de login
-- O nome do usuário logado é exibido na navbar
+- **Segurança**: Todas as views (exceto login) exigem autenticação com `@login_required`
+- **Redirecionamento automático**: Usuários não autenticados são enviados para `/login/`
+- **Sessão segura**: Logout redireciona para página de login
+- **Interface personalizada**: Nome do usuário exibido na navbar
+- **Status de pedidos**: Sistema com três estados (Pendente, Em Produção, Entregue)
+- **Cálculos automáticos**: Total dos pedidos calculado dinamicamente
+- **Validação**: Formulários com validação robusta e mensagens de erro
 
 ## 🤝 Contribuição
 
