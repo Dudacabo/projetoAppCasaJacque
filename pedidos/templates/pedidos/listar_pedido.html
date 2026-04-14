@@ -21,7 +21,7 @@
         >
 
         <select name="status" class="form-select" style="max-width: 200px;">
-            <option value="">Todos</option>
+            <option value="">Selecione um status</option>
             <option value="pendente" {% if status == 'pendente' %}selected{% endif %}>⏳ Pendente</option>
             <option value="producao" {% if status == 'producao' %}selected{% endif %}>🛠️ Produção</option>
             <option value="entregue" {% if status == 'entregue' %}selected{% endif %}>✅ Entregue</option>
@@ -51,11 +51,11 @@
                 <td class="text-center">{{ pedido.data_criacao|date:"d/m/Y" }}</td>
                 <td class="text-center">
                     {% if pedido.status == 'entregue' %}
-                        <span>Entregue</span>
+                        <span>✅ Entregue</span>
                     {% elif pedido.status == 'producao' %}
-                        <span>Em Produção</span>
+                        <span>🛠️ Em Produção</span>
                     {% else %}
-                        <span>Pendente</span>
+                        <span>⏳ Pendente</span>
                     {% endif %}
                 </td>
                 <td class="text-center">
