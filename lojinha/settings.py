@@ -28,6 +28,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['.onrender.com']
 
+SITE_NAME = "Sabor da Casa Jacque 💛"
 
 # Application definition
 
