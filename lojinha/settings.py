@@ -28,8 +28,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['.onrender.com']
 
-SITE_NAME = "Sabor da Casa Jacque 💛"
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -149,3 +147,6 @@ JAZZMIN_SETTINGS = {
 
     "theme": "flatly",
 }
+
+
+SITE_NAME = "Sabor da Casa Jacque 💛"

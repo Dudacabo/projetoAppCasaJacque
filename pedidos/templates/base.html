@@ -12,16 +12,12 @@
 <body class="bg-light">
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg mb-4" style="background-color: #000; color: #fff;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
     <div class="container">
 
         <!-- Nome do sistema -->
         <a class="navbar-brand fw-bold" href="#">
-
-           {% load static %}
-
-            <img src="{% static 'img/logo.png' %}" height="40" class="me-2">
-            <span class="fw-bold">{{ SITE_NAME }}</span> 
+            {{ SITE_NAME }}
         </a>
 
         <!-- Botão Mobile -->
