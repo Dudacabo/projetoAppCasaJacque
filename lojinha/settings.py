@@ -32,17 +32,22 @@ ALLOWED_HOSTS = ['.onrender.com']
 
 INSTALLED_APPS = [
     'jazzmin',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'pedidos',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -151,3 +156,5 @@ JAZZMIN_SETTINGS = {
 
 
 SITE_NAME = "Sabor da Casa Jacque 💛"
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
