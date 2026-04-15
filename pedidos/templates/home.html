@@ -80,11 +80,11 @@ HOME
                             <td class="text-center">{{ pedido.data_criacao|date:"d/m/Y" }}</td>
                             <td class="text-center">
                                 {% if pedido.status == 'entregue' %}
-                                    <span>Entregue</span>
+                                    <span>✅ Entregue</span>
                                 {% elif pedido.status == 'producao' %}
-                                    <span>Em Produção</span>
+                                    <span>🛠️ Em Produção</span>
                                 {% else %}
-                                    <span>Pendente</span>
+                                    <span>⏳ Pendente</span>
                                 {% endif %}
                             </td>
                             <td class="text-center">
@@ -97,7 +97,7 @@ HOME
                         {% empty %}
                         <tr>
                             <td colspan="5" class="text-center">
-                                Nenhum pedido cadastrado.
+                                📋 Nenhum pedido cadastrado.
                             </td>
                         </tr>
                         {% endfor %}
@@ -132,7 +132,7 @@ HOME
                         {% empty %}
                         <tr>
                             <td colspan="3" class="text-center">
-                                Nenhum produto cadastrado.
+                                📦 Nenhum produto cadastrado.
                             </td>
                         </tr>
                         {% endfor %}
