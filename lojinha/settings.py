@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['.onrender.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -124,3 +125,26 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Sabor da Casa",
+    "site_header": "Sabor da Casa Admin",
+    "site_brand": "Painel Admin",
+    "welcome_sign": "Bem-vinda ao sistema 💛",
+    "copyright": "Sabor da Casa",
+
+    "topmenu_links": [
+        {"name": "Home", "url": "/", "permissions": ["auth.view_user"]},
+    ],
+
+    "show_sidebar": True,
+    "navigation_expanded": True,
+
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "pedidos.pedido": "fas fa-shopping-cart",
+        "pedidos.produto": "fas fa-box",
+    },
+
+    "theme": "flatly",
+}
