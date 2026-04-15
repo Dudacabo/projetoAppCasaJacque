@@ -1,76 +1,88 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Sistema{% endblock %}</title>
+    <title>{% block title %}{{ SITE_NAME }}{% endblock %}</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .navbar-custom {
+            background-color: #000;
+        }
+
+        .btn-gold {
+            background-color: #c59d00;
+            color: white;
+            border: none;
+        }
+
+        .btn-gold:hover {
+            background-color: #a88400;
+            color: white;
+        }
+    </style>
 </head>
 
 <body class="bg-light">
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom mb-4">
     <div class="container">
 
-        <!-- Nome do sistema -->
-        <a class="navbar-brand fw-bold" href="#">
+        <!-- LOGO + NOME -->
+        <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="{% url 'pedidos:home' %}">
+            <img src="{% static 'img/logo.png' %}" height="40">
             {{ SITE_NAME }}
         </a>
 
-        <!-- Botão Mobile -->
+        <!-- BOTÃO MOBILE -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Links -->
+        <!-- LINKS -->
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'pedidos:home' %}">
-                        🏠 Home
-                    </a>
+                    <a class="nav-link" href="{% url 'pedidos:home' %}">🏠 Home</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'pedidos:listar_pedido' %}">
-                        📄 Pedidos
-                    </a>
+                    <a class="nav-link" href="{% url 'pedidos:listar_pedido' %}">📄 Pedidos</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'pedidos:listar_produto' %}">
-                        🛒 Produtos
-                    </a>
+                    <a class="nav-link" href="{% url 'pedidos:listar_produto' %}">🛒 Produtos</a>
                 </li>
 
             </ul>
         </div>
 
-       <div class="d-flex align-items-center gap-3 text-white">
+        <!-- USUÁRIO -->
+        <div class="d-flex align-items-center gap-3 text-white">
 
-    {% if user.is_authenticated %}
-        <span>
-            Olá, {{ user.username }}
-        </span>
-    {% endif %}
+            {% if user.is_authenticated %}
+                <span>👤 {{ user.username }}</span>
+            {% endif %}
 
-    <form action="{% url 'logout' %}" method="POST">
-        {% csrf_token %}
-        <button class="btn btn-danger btn-sm">
-            Sair da conta
-        </button>
-    </form>
+            <form action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <button class="btn btn-danger btn-sm">
+                    Sair
+                </button>
+            </form>
 
-</div>
+        </div>
 
     </div>
 </nav>
 
-<!-- CONTEÚDO CENTRALIZADO -->
+<!-- CONTEÚDO -->
 <div class="container d-flex justify-content-center">
     <div class="col-12 col-md-8 col-lg-6">
         {% block content %}
@@ -78,7 +90,7 @@
     </div>
 </div>
 
-<!-- Bootstrap JS (necessário para menu mobile funcionar) -->
+<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
