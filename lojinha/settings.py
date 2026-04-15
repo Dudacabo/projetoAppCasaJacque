@@ -75,7 +75,11 @@ WSGI_APPLICATION = 'lojinha.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    'default': dj_database_url.parse(
+        os.environ.get("DATABASE_URL"),
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
 
@@ -120,20 +124,3 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'
-
-import sys
-
-if 'runserver' not in sys.argv:
-    try:
-        from django.core.management import call_command
-        call_command('migrate')
-    except Exception as e:
-        print(f"Erro ao rodar migrate automaticamente: {e}")
-
-
-from django.contrib.auth import get_user_model
-
-User = get_user_model()
-
-if not User.objects.filter(username='admin').exists():
-    User.objects.create_superuser('admin', 'admin@email.com', '123456')
