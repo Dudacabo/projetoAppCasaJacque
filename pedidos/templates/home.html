@@ -9,8 +9,8 @@ HOME
 <div class="container mt-4">
 
     <div class="text-center mb-4">
-        <h2>Bem-vinda ao {{ SITE_NAME }}</h2>
-        <p class="text-muted">Controle de pedidos e produção 💛</p>
+        <h2>📊 Painel de Controle</h2>
+        <p class="text-muted">{{ SITE_NAME }}</p>
     </div>
 
     <div class="text-center mb-4">
@@ -19,6 +19,48 @@ HOME
         </a>
     </div>
 
+    <!-- 💰 RESUMO FINANCEIRO -->
+    <div class="row text-center mb-4">
+
+        <div class="col-md-3">
+            <div class="card shadow-sm p-3">
+                <h6>💰 Total Vendido</h6>
+                <h3 class="text-success">
+                    R$ {{ total_vendido|floatformat:2 }}
+                </h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm p-3">
+                <h6>💵 Ticket Médio</h6>
+                <h3>
+                    R$ {{ ticket_medio|floatformat:2 }}
+                </h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm p-3">
+                <h6>📅 Hoje</h6>
+                <h3>
+                    R$ {{ vendas_hoje|floatformat:2 }}
+                </h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm p-3">
+                <h6>📆 Mês</h6>
+                <h3>
+                    R$ {{ vendas_mes|floatformat:2 }}
+                </h3>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 📊 RESUMO OPERACIONAL -->
     <div class="row text-center mb-4">
 
         <div class="col-md-3">
@@ -51,13 +93,12 @@ HOME
 
     </div>
 
-    <div class="d-flex justify-content-center gap-4 flex-wrap">
-
-        <!-- Tabela Pedidos -->
-        <div class="flex-fill" style="max-width: 500px;">
+    <!-- 📋 TABELA DE PEDIDOS -->
+    <div class="d-flex justify-content-center">
+        <div class="w-100" style="max-width: 600px;">
             <div class="card shadow-sm p-3">
 
-                <h4 class="text-center mb-3">Lista de Pedidos</h4>
+                <h4 class="text-center mb-3">📋 Últimos Pedidos</h4>
 
                 <table class="table table-striped table-bordered table-sm mb-0">
 
@@ -93,7 +134,7 @@ HOME
 
                         {% empty %}
                         <tr>
-                            <td colspan="5" class="text-center">
+                            <td colspan="4" class="text-center">
                                 📋 Nenhum pedido cadastrado.
                             </td>
                         </tr>
@@ -101,10 +142,9 @@ HOME
                     </tbody>
 
                 </table>
+
             </div>
         </div>
-
-
     </div>
 
 </div>
