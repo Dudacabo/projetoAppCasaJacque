@@ -15,6 +15,9 @@ HOME
     .card:hover {
         transform: translateY(-3px);
     }
+    .row {
+        justify-content: center;
+    }
 </style>
 
 <div class="container mt-4" style="max-width: 900px;">
@@ -38,36 +41,36 @@ HOME
         <div class="col-md-3 mb-3">
             <div class="card shadow-sm p-3">
                 <h6>💰 Total Vendido</h6>
-                <h2 class="text-success fw-bold">
-                    R$ {{ total_vendido|floatformat:2 }}
-                </h2>
+                <h5 class="text-success fw-bold">
+                    R$ {{ total_vendido|default:0|floatformat:2 }}
+                </h5>
             </div>
         </div>
 
         <div class="col-md-3 mb-3">
             <div class="card shadow-sm p-3">
-                <h6>🧾 Ticket Médio</h6>
-                <h4>
-                    R$ {{ ticket_medio|floatformat:2 }}
-                </h4>
+                <h6>💵 Ticket Médio</h6>
+                <h5 class="fw-bold">
+                    R$ {{ ticket_medio|default:0|floatformat:2 }}
+                </h5>
             </div>
         </div>
 
         <div class="col-md-3 mb-3">
             <div class="card shadow-sm p-3">
                 <h6>📅 Hoje</h6>
-                <h4>
-                    R$ {{ total_hoje|floatformat:2 }}
-                </h4>
+                <h5 class="fw-bold">
+                    R$ {{ total_hoje|default:0|floatformat:2 }}
+                </h5>
             </div>
         </div>
 
         <div class="col-md-3 mb-3">
             <div class="card shadow-sm p-3">
                 <h6>📆 Mês</h6>
-                <h4>
-                    R$ {{ total_mes|floatformat:2 }}
-                </h4>
+                <h5 class="fw-bold">
+                    R$ {{ total_mes|default:0|floatformat:2 }}
+                </h5>
             </div>
         </div>
 
@@ -79,28 +82,28 @@ HOME
         <div class="col-md-3 mb-3">
             <div class="card shadow-sm p-3">
                 <h6>📦 Total de Pedidos</h6>
-                <h4>{{ total_pedidos }}</h4>
+                <h5 class="fw-bold">{{ total_pedidos }}</h5>
             </div>
         </div>
 
         <div class="col-md-3 mb-3">
             <div class="card shadow-sm p-3">
                 <h6>🛠️ Em Produção</h6>
-                <h4 class="text-warning">{{ pedidos_producao }}</h4>
+                <h5 class="text-warning fw-bold">{{ pedidos_producao }}</h5>
             </div>
         </div>
 
         <div class="col-md-3 mb-3">
             <div class="card shadow-sm p-3">
                 <h6>⏳ Pendentes</h6>
-                <h4 class="text-secondary">{{ pedidos_pendentes }}</h4>
+                <h5 class="text-secondary fw-bold">{{ pedidos_pendentes }}</h5>
             </div>
         </div>
 
         <div class="col-md-3 mb-3">
             <div class="card shadow-sm p-3">
                 <h6>✅ Entregues</h6>
-                <h4 class="text-success">{{ pedidos_entregues }}</h4>
+                <h5 class="text-success fw-bold">{{ pedidos_entregues }}</h5>
             </div>
         </div>
 
