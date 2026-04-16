@@ -12,7 +12,7 @@ class Produto(models.Model):
 
 class Pedido(models.Model):
     cliente_nome = models.CharField(max_length=100)
-    data_criacao = models.DateTimeField(auto_now_add=True)
+    data_criacao = models.DateTimeField(null=True, blank=True)
     STATUS_CHOICES = (
         ('pendente', 'Pendente'),
         ('producao', 'Em Produção'),

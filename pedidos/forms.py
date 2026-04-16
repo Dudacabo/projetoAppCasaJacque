@@ -27,15 +27,17 @@ class PedidoForm(forms.ModelForm):
 
     class Meta:
         model = Pedido
-        fields = ("cliente_nome", 'status')
+        fields = ("cliente_nome",'data_criacao', 'status')
 
         widgets = {
             'cliente_nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Digite aqui'}),
+            'data_criacao': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'status': forms.Select(attrs={'class': 'form-control'}),
         }
 
         labels = {
             'cliente_nome': "Nome do cliente",
+            'data_criacao': "Data do pedido",
             'status': "Status do pedido",
         }
 

@@ -147,7 +147,13 @@ def cadastrar_pedido(request):
         form = PedidoForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            pedido = form.save(commit=False)
+
+            # 🔥 Se não preencher a data, usa agora
+            if not pedido.data_criacao:
+                pedido.data_criacao = now()
+
+            pedido.save()
             return redirect("pedidos:listar_pedido")
 
     else:
