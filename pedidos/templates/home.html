@@ -17,9 +17,6 @@ HOME
         <a href="{% url 'pedidos:cadastrar_pedido' %}" class="btn btn-gold">
              Novo Pedido
         </a>
-        <a href="{% url 'pedidos:cadastrar_produto' %}" class="btn btn-gold">
-             Novo Produto
-        </a>
     </div>
 
     <div class="row text-center mb-4">
@@ -107,40 +104,6 @@ HOME
             </div>
         </div>
 
-        <!-- Tabela Produtos -->
-        <div class="flex-fill" style="max-width: 500px;">
-            <div class="card shadow-sm p-3">
-
-                <h4 class="text-center mb-3">Lista de Produtos</h4>
-
-                <table class="table table-striped table-bordered table-sm mb-0">
-
-                    <thead class="table-dark">
-                        <tr>
-                            <th class="text-center">Nome</th>
-                            <th class="text-center">Preço</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {% for produto in produtos %}
-                        <tr>
-                            <td class="text-center">{{ produto.nome }}</td>
-                            <td class="text-center">R$ {{ produto.preco|floatformat:2 }}</td>
-                        </tr>
-
-                        {% empty %}
-                        <tr>
-                            <td colspan="3" class="text-center">
-                                📦 Nenhum produto cadastrado.
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-
-                </table>
-            </div>
-        </div>
 
     </div>
 
