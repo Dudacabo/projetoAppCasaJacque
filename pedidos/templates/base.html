@@ -26,6 +26,10 @@
             background-color: #a88400;
             color: white;
         }
+        .card{
+            border-radius: 12px;
+            padding: 15px;
+        }
     </style>
 </head>
 
@@ -82,17 +86,6 @@
 
     </div>
 </nav>
-
-<!-- MENSAGENS (feedback pro usuário) -->
-<div class="container">
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-success text-center">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
-</div>
 
 <!-- CONTEÚDO -->
 <div class="container d-flex justify-content-center">

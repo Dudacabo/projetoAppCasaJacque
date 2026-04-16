@@ -51,11 +51,11 @@
                 <td class="text-center">{{ pedido.data_criacao|date:"d/m/Y" }}</td>
                 <td class="text-center">
                     {% if pedido.status == 'entregue' %}
-                        <span>✅ Entregue</span>
+                        <span class="badge bg-success">Entregue</span>
                     {% elif pedido.status == 'producao' %}
-                        <span>🛠️ Em Produção</span>
+                        <span class="badge bg-warning text-dark">Produção</span>
                     {% else %}
-                        <span>⏳ Pendente</span>
+                        <span class="badge bg-secondary">Pendente</span>
                     {% endif %}
                 </td>
                 <td class="text-center">
@@ -73,7 +73,7 @@
     </table>
 
     <div style="text-align: center;">
-        <a href="{% url 'pedidos:cadastrar_pedido' %}" class="btn btn-success mb-3">
+        <a href="{% url 'pedidos:cadastrar_pedido' %}" class="btn btn-gold">
             Novo Pedido
         </a>
     </div>

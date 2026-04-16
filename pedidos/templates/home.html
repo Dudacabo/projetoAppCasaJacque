@@ -14,11 +14,11 @@ HOME
     </div>
 
     <div class="text-center mb-4">
-        <a href="{% url 'pedidos:cadastrar_pedido' %}" class="btn btn-success me-2">
-            ➕ Novo Pedido
+        <a href="{% url 'pedidos:cadastrar_pedido' %}" class="btn btn-gold">
+             Novo Pedido
         </a>
-        <a href="{% url 'pedidos:cadastrar_produto' %}" class="btn btn-primary">
-            ➕ Novo Produto
+        <a href="{% url 'pedidos:cadastrar_produto' %}" class="btn btn-gold">
+             Novo Produto
         </a>
     </div>
 
@@ -26,14 +26,14 @@ HOME
 
         <div class="col-md-3">
             <div class="card shadow-sm p-3">
-                <h6>📦 Pedidos</h6>
+                <h6>📦 Total de Pedidos</h6>
                 <h3>{{ total_pedidos }}</h3>
             </div>
         </div>
 
         <div class="col-md-3">
             <div class="card shadow-sm p-3">
-                <h6>🛠️ Produção</h6>
+                <h6>🛠️ Em Produção</h6>
                 <h3 class="text-warning">{{ pedidos_producao }}</h3>
             </div>
         </div>
@@ -80,11 +80,11 @@ HOME
                             <td class="text-center">{{ pedido.data_criacao|date:"d/m/Y" }}</td>
                             <td class="text-center">
                                 {% if pedido.status == 'entregue' %}
-                                    <span>✅ Entregue</span>
+                                    <span class="badge bg-success">Entregue</span>
                                 {% elif pedido.status == 'producao' %}
-                                    <span>🛠️ Em Produção</span>
+                                    <span class="badge bg-warning text-dark">Produção</span>
                                 {% else %}
-                                    <span>⏳ Pendente</span>
+                                    <span class="badge bg-secondary">Pendente</span>
                                 {% endif %}
                             </td>
                             <td class="text-center">
