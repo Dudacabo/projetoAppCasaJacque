@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProdutoForm, PedidoForm, ItemPedidoForm
 from .models import Pedido, Produto, ItemPedido
-from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 from django.core.paginator import Paginator
+from django.utils.timezone import now
+from django.shortcuts import render
 
 def is_admin(user):
     return user.is_superuser
@@ -12,22 +13,58 @@ def is_admin(user):
 # HOME
 @login_required
 def home(request):
+    # 🔹 Últimos 5 pedidos
     pedidos = Pedido.objects.all().order_by('-id')[:5]
 
+    # 🔹 CONTADORES
     total_pedidos = Pedido.objects.count()
     pedidos_producao = Pedido.objects.filter(status='producao').count()
     pedidos_pendentes = Pedido.objects.filter(status='pendente').count()
-    pedidos_entregues = Pedido.objects.filter(status='entregue').count()
+    pedidos_entregues_qtd = Pedido.objects.filter(status='entregue').count()
+
+    # 🔹 BASE FINANCEIRA (somente entregues)
+    pedidos_entregues = Pedido.objects.filter(status='entregue')
+
+    # 💰 TOTAL VENDIDO
+    total_vendido = sum(p.total for p in pedidos_entregues)
+
+    # 💵 TICKET MÉDIO
+    ticket_medio = (
+        total_vendido / pedidos_entregues_qtd
+        if pedidos_entregues_qtd > 0 else 0
+    )
+
+    # 📅 HOJE
+    hoje = now().date()
+    vendas_hoje = sum(
+        p.total for p in pedidos_entregues
+        if p.data_criacao.date() == hoje
+    )
+
+    # 📆 MÊS
+    mes = now().month
+    vendas_mes = sum(
+        p.total for p in pedidos_entregues
+        if p.data_criacao.month == mes
+    )
 
     context = {
-    "pedidos": pedidos,
-    "total_pedidos": total_pedidos,
-    "pedidos_producao": pedidos_producao,
-    "pedidos_pendentes": pedidos_pendentes,
-    "pedidos_entregues": pedidos_entregues,
+        "pedidos": pedidos,
+
+        # 📊 contadores
+        "total_pedidos": total_pedidos,
+        "pedidos_producao": pedidos_producao,
+        "pedidos_pendentes": pedidos_pendentes,
+        "pedidos_entregues": pedidos_entregues_qtd,
+
+        # 💰 financeiro
+        "total_vendido": total_vendido,
+        "ticket_medio": ticket_medio,
+        "vendas_hoje": vendas_hoje,
+        "vendas_mes": vendas_mes,
     }
 
-    return render(request, "home.html", context)        
+    return render(request, "home.html", context)   
 
 
 
