@@ -38,14 +38,14 @@ def home(request):
     hoje = now().date()
     vendas_hoje = sum(
         p.total for p in pedidos_entregues
-        if p.data_criacao.date() == hoje
+        if p.data_criacao and p.data_criacao.date() == hoje
     )
 
     # 📆 MÊS
     mes = now().month
     vendas_mes = sum(
         p.total for p in pedidos_entregues
-        if p.data_criacao.month == mes
+        if p.data_criacao and p.data_criacao.month == mes
     )
 
     context = {
