@@ -14,7 +14,7 @@ def is_admin(user):
 @login_required
 def home(request):
     # 🔹 Últimos 5 pedidos
-    pedidos = Pedido.objects.all().order_by('-id')[:5]
+    pedidos = Pedido.objects.order_by('-data_criacao', '-id')[:5]
 
     # 🔹 CONTADORES
     total_pedidos = Pedido.objects.count()
