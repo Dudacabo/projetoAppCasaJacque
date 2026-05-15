@@ -13,6 +13,7 @@ import os
 import dj_database_url
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,6 +33,7 @@ ALLOWED_HOSTS = ['.onrender.com']
 
 INSTALLED_APPS = [
     'jazzmin',
+    'import_export',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'pedidos',
+
 ]
 
 MIDDLEWARE = [
